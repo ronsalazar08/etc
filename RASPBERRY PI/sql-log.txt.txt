@@ -1,0 +1,22 @@
+sqlite3 \\10.44.2.101\share\TimeKeeping.db
+
+sqlite3 \\10.44.2.102\share\TimeKeeping.db
+
+
+insert into logbox_tbl VALUES ('16091305' , '2020-03-06 19:30:01', 'O', NULL, 'DCA6321292D7', '10.44.2.102', 'ttechOUT');
+insert into duplicate_tbl VALUES ('16091305' , '2020-03-06 19:30:03', 'O');
+insert into logbox_tbl VALUES ('16091305' , '2020-03-06 19:30:01', 'O', NULL, 'DCA6321292D7', '10.44.2.102', 'ttechOUT');
+16091305|2020-03-16 06:58:25|I|1|F9A138B15DD9|10.44.2.101|ttechIN
+
+insert into logbox_tbl VALUES ('16091305' , '2020-03-16 06:45:28', 'I', NULL, 'F9A138B15DD9', '10.44.2.101', 'ttechIN');
+insert into logbox_tbl VALUES ('16091305' , '2020-03-07 06:56:01', 'I', NULL, '8F6C7AE55D36', '10.44.2.101', 'ttechIN');
+ VALUES ('16091305' , '2020-03-12 06:45:38', 'I', NULL, '8F6C7AE55D36', '10.44.2.101', 'ttechIN');
+update logbox_tbl set transaction_date = '2020-03-12 06:45:37' where id_number = 16091305 and transaction_date = '2020-03-12 06:47:12
+
+
+select * from logbox_tbl where date(transaction_date) > '2021-08-01';
+
+
+insert into logbox_tbl VALUES ('16091305' , '2021-08-11 06:44:53', 'I', NULL, 'DCA6321292AB', '10.44.2.101', 'ttechIN');
+
+insert into logbox_tbl VALUES ('16091305' , '2021-07-26 18:47:15', 'O', NULL, 'DCA6321292D7', '10.44.2.102', 'ttechOUT');

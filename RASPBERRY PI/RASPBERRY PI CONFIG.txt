@@ -1,0 +1,149 @@
+* APPS
+	sudo apt-get install apache2 -y
+	sudo apt-get install php libapache2-mod-php -y
+	sudo apt-get install mariadb-server python-mysqldb
+	sudo apt-get install python3-dev
+	sudo apt-get install xscreensaver
+	sudo apt-get dist-upgrade
+	sudo pip install pdfkit
+	sudo apt-get install wkhtmltopdf
+	sudo apt-get install mariadb-server php-mysql
+	sudo apt-get update && sudo apt-get upgrade
+	sudo chown pi:pi /var/www/html
+
+* python 3.6.5
+	sudo apt-get update
+	sudo apt-get install build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev
+	 wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tar.xz
+	tar xf Python-3.6.5.tar.xz
+	cd Python-3.6.5
+	./configure
+	make
+	sudo make altinstall
+
+	sudo rm -r Python-3.6.5
+	rm Python-3.6.5.tar.xz
+	sudo apt-get --purge remove build-essential tk-dev
+	sudo apt-get --purge remove libncurses5-dev libncursesw5-dev libreadline6-dev
+	sudo apt-get --purge remove libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev
+	sudo apt-get --purge remove libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev
+	sudo apt-get autoremove
+	sudo apt-get clean
+
+* python mysqldb module install
+	sudo apt-get install python3-dev default-libmysqlclient-dev
+	sudo pip3 install mysqlclient
+
+* PHP CONFIG for shutdown
+	sudo nano /etc/sudoers
+	add:
+	www-data ALL = NOPASSWD: /sbin/shutdown
+	on last line
+	command in php file:
+	<?php system('sudo /sbin/shutdown -h now');?>
+
+
+* MYSQL CONFIG to add password
+	https://websiteforstudents.com/mariadb-installed-without-password-prompts-for-root-on-ubuntu-17-10-18-04-beta/
+	sudo mysql -u root
+	use mysql;
+	update user set plugin='' where User='root';
+	flush privileges;
+	exit
+	sudo systemctl restart mariadb.service
+	sudo mysql_secure_installation
+	all yes (EXCEPT root login remotely  #for SERVER) 
+
+* MYSQL CONFIG (SERVER)
+	sudo mysql -u root
+	use mysql;
+	create user remote identified by '1111';
+	flush privileges;
+	exit;
+
+	sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+		from:	bind-address           = 127.0.0.1
+		to:	bind-address           = 0.0.0.0 
+	service mysql restart
+	GRANT ALL ON *.* TO 'remote'@'%' identified by '1111';
+	service mysql restart
+	#comand on client: mysql -u remote -p -h 10.44.0.158 #ip address of server
+
+
+* CRON
+	00 12 * * 1-6 curl http://10.44.0.145/absent.php
+	00 5 * * SUN curl http://10.44.0.145/totdata.php
+	00 12 * * MON curl http://10.44.0.145/ttech/autoClear.php
+	30 19 * * SUN curl http://10.44.0.145/shift.php
+	00 6 * * 1-6 curl http://10.44.0.145/confirmToZero.php
+	59 15 * * 1-6 curl http://10.44.0.145/confirmToOne.php
+
+* LXSESSION
+	@lxpanel --profile LXDE-pi
+	@pcmanfm --desktop --profile LXDE-pi
+	@xscreensaver -no-splash
+	@point-rpi
+	@bash /home/pi/Desktop/ProcessingFP/application.linux-arm64/ProcessingFP -run
+	@chromium-browser --noerrdialogs --kiosk localhost --incognito
+	@bash /home/pi/Desktop/backupToEmail/openPycron.sh -run
+
+
+*chown command
+	chown 
+
+
+++++++++++++++++SET STATIC NETWORK+++++++++++++=
+
+
+	sudo nano /etc/dhcpcd.conf
+
+
+
+	interface wlan0
+	static ip_address=10.44.0.195/24
+	static routers=10.44.0.254
+	static domain_name_servers=10.44.1.126 208.67.222.222
+
+	# A sample configuration for dhcpcd.
+	# See dhcpcd.conf(5) for details.
+
+	# Allow users of this group to interact with dhcpcd via the control socket.
+	#controlgroup wheel
+
+	# Inform the DHCP server of our hostname for DDNS.
+	hostname
+
+	# Use the hardware address of the interface for the Client ID.
+	clientid
+	# or
+	# Use the same DUID + IAID as set in DHCPv6 for DHCPv4 ClientID as per RFC4361.
+	#duid
+
+
+*******************  MEASURES TEMP ****************************
+
+	vcgencmd measure_temp
+
+******************************************************************
+
+
+
+
+
+
+
+
+
+
+
+***********************************************************
+ARDUINO CLI WINDOWS
+***********************************************************
+* DOWNLOAD .EXE FILE in https://github.com/arduino/arduino-cli
+* run arduino-cli board list to get port and board name
+* if board name is unknown run arduino-cli core install arduino:avr
+* run board list again
+* run arduino-cli compile --fqbn arduino:avr:nano:cpu=atmega328old C:\Users\ACAD-PC\Documents\Arduino\libraries\Fingerprint_Scanner-TTL-master\examples\FPS_Serial_Passthrough
+* dont forget to compile if the sketch is new
+* 			   /PORT/	/=========BOARD NAME============/ /PATH/
+* run arduino-cli upload -p COM6 --fqbn arduino:avr:nano:cpu=atmega328old C:\Users\ACAD-PC\Documents\Arduino\libraries\Fingerprint_Scanner-TTL-master\examples\FPS_Serial_Passthrough

@@ -1,0 +1,51 @@
+**create ".htaccess" and ".htpasswd" file inside the folder
+	* contents of ".htacess"
+		AuthType Basic  
+		AuthName "restricted area"  
+		AuthUserFile /var/www/html/kdr/.htpasswd	
+		require valid-user
+							#path of folder /.htpasswd#
+	*contents of ".htpasswd"
+							#create encrypted pass in "https://shop.alterlinks.com/htpasswd/htpasswd.php"#
+		raspberrypicam:wGsac.2rdQCyc		#username:password#
+							"raspberrypicam:camera3dx"
+
+
+
+**in terminal jessie
+	*sudo nano /etc/apache2/apache2.conf
+	From:
+		<Directory /var/www/>
+       		 Options Indexes FollowSymLinks MultiViews
+       		 AllowOverride None
+        		Order allow,deny
+       		 allow from all
+   		 </Directory>
+	To:
+		<Directory /var/www/>
+       		 Options Indexes FollowSymLinks MultiViews
+       		 AllowOverride All				#change None to All#
+        		Order allow,deny
+       		 allow from all
+   		 </Directory>
+	*ctrl+O and ctrl+X
+
+
+**in terminal stretch
+	*sudo nano /etc/apache2/apache2.conf
+	From:
+		<Directory /var/www/>
+       		 Options Indexes FollowSymLinks
+       		 AllowOverride None
+       		 Require all granted
+   		 </Directory>
+	To:
+		<Directory /var/www/>
+       		 Options Indexes FollowSymLinks
+       		 AllowOverride All				#change None to All#
+       		 Require all granted
+   		 </Directory>
+	*ctrl+O and ctrl+X
+
+	
+	*sudo service apache2 restart

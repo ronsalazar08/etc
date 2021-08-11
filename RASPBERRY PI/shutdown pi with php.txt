@@ -1,0 +1,15 @@
+------------in terminal 
+sudo nano /etc/sudoers
+
+-add
+
+%www-data ALL=NOPASSWD: /sbin/shutdown
+
+ctr+o to save
+ctrl+x to exit
+
+
+--------------php code
+<?php
+shell_exec('sudo shutdown -h now');
+?>
