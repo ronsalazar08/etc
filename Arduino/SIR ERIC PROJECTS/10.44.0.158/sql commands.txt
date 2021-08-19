@@ -1,0 +1,21 @@
+create table users (right_thumb int(3), right_index int(3), right_middle int(3), right_ring int(3), right_little int(3), left_thumb int(3), left_index int(3), left_middle int(3), left_ring int(3), left_little int(3), id varchar(8), first_name varchar(50), last_name varchar(50));
+
+
+insert into users (right_thumb, right_index, right_middle, right_ring, right_little, left_thumb, left_index, left_middle, left_ring, left_little, id , first_name , last_name) values ('101',  '102', '103', '104', '105', '106', '107', '108', '109', '110', 'B5C92F4C', 'RON MICHAEL', 'SALAZAR');
+
+select id, first_name, last_name from users where right_thumb =  'B5C92F4C' or right_index =  'B5C92F4C' or right_middle =  'B5C92F4C' or right_ring =  'B5C92F4C' or right_little =  'B5C92F4C' or left_thumb =  'B5C92F4C' or left_index =  'B5C92F4C' or left_middle =  'B5C92F4C' or left_ring =  'B5C92F4C' or left_little =  'B5C92F4C' or id =  'B5C92F4C'
+
+
+
+
+select id, first_name, last_name from users where right_thumb =  '$searchId' or right_index =  '$searchId' or right_middle =  '$searchId' or right_ring =  '$searchId' or right_little =  '$searchId' or left_thumb =  '$searchId' or left_index =  '$searchId' or left_middle =  '$searchId' or left_ring =  '$searchId' or left_little =  '$searchId' or id =  '$searchId'
+
+
+insert into users (right_thumb, right_index, right_middle, right_ring, right_little, left_thumb, left_index, left_middle, left_ring, left_little, id , first_name , last_name) values ('11',  '12', '13', '14', '15', '16', '17', '18', '19', '20', '86BF6B 08', 'ANGELITO', 'LANDAOS');
+
+
+
+select id, first_name, last_name from users where right_thumb =  '86BF6B 08' or right_index =  '86BF6B 08' or right_middle =  '86BF6B 08' or right_ring =  '86BF6B 08' or right_little =  '86BF6B 08' or left_thumb =  '86BF6B 08' or left_index =  '86BF6B 08' or left_middle =  '86BF6B 08' or left_ring =  '86BF6B 08' or left_little =  '86BF6B 08' or id =  '86BF6B 08'
+
+
+insert into users (right_thumb, right_index, right_middle, right_ring, right_little, left_thumb, left_index, left_middle, left_ring, left_little , first_name , last_name) values ('21',  '22', '23', '24', '25', '26', '27', '28', '29', '20', 'ERIC', 'DEL ROSARIO');
